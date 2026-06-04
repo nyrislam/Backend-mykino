@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response, status, HTTPException, Depends
 from typing import List
-from . import models, schemas
+from . import models, schemas, utils
 from .database import engine, Session, get_db
 from .settings import setup_cors
 
@@ -16,8 +16,8 @@ def get_users(db: Session = Depends(get_db)):
 
 @app.post('/users', status_code=status.HTTP_201_CREATED, response_model=schemas.Resp)
 def create_user(reg: schemas.UserCreate, db: Session = Depends(get_db)):
+    reg.password = utils.hash(reg.password)
     new_user = models.User(**reg.dict())
-
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
