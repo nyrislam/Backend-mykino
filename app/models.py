@@ -6,7 +6,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, nullable=False)
     username = Column(String, nullable=False)
-    gmail = Column(String, nullable=False, unique=True)
+    email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
     created_at = Column(
         TIMESTAMP(timezone=False),

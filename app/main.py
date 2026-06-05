@@ -5,6 +5,7 @@ from .database import engine, Session, get_db
 from .settings import setup_cors
 from .routers import users, auth
 models.Base.metadata.create_all(bind=engine)
+
 app = FastAPI()
 setup_cors(app)
 

@@ -1,7 +1,7 @@
 from pydantic import BaseModel, EmailStr
 
 class UserBase(BaseModel):
-    gmail: EmailStr
+    email: EmailStr
 
 class UserCreate(UserBase):
     username: str
