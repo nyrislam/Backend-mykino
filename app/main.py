@@ -3,7 +3,7 @@ from typing import List
 from . import models, schemas, utils
 from .database import engine, Session, get_db
 from .settings import setup_cors
-from .routers import users, auth
+from .routers import users, auth, wishlists
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -16,3 +16,4 @@ def root():
 
 app.include_router(users.router)
 app.include_router(auth.router)
+app.include_router(wishlists.router)

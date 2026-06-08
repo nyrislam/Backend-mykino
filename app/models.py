@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, TIMESTAMP, text
+from sqlalchemy import Column, Integer, String, TIMESTAMP, text, ForeignKey
 from .database import Base
 
 class User(Base):
@@ -13,3 +13,24 @@ class User(Base):
         nullable=False,
         server_default=text("now()")
     )
+
+class Wishlist(Base):
+    __tablename__ = "wishlists"
+
+    id = Column(Integer, primary_key=True)
+    kinopoiskId = Column(Integer, nullable=False)
+    name = Column(String, nullable=False)
+    posterUrl = Column(String, nullable=False)
+
+    owner_id = Column(
+        Integer,
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=False
+    )
+    # __table_args__ = (
+    #     UniqueConstraint(
+    #         "owner_id",
+    #         "kinopoiskId",
+    #         name="uq_owner_movie"
+    #     ),
+    # )
